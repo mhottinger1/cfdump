@@ -47,6 +47,7 @@ func writeDataToCsv(allApps [][]string) {
 	}
 
 	csvwriter := csv.NewWriter(csvfile)
+	csvwriter.Write([]string{"Foundation", "App Name", "Organization", "Space", "Instances", "State", "Metadata"})
 	for _, row := range allApps {
 		_ = csvwriter.Write(row)
 	}
@@ -87,8 +88,8 @@ func processAppsOnePageAtATime(client *cfclient.Client) [][]string {
 			row := []string{
 				client.Config.ApiAddress,
 				a.Name,
-				space.Name,
 				org.Name,
+				space.Name,
 				strconv.Itoa(a.Instances),
 				a.State,
 			}
